@@ -59,11 +59,8 @@ def show_svg():
 
         items = panel.find_elements(By.CSS_SELECTOR, "li")
 
-        if len(items) < 24:
-            raise Exception("Not enough class items found")
-
         # Select item
-        items[23].click()
+        items[31].click()
 
         # Let SVG render
         time.sleep(5)
