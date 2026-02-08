@@ -74,6 +74,11 @@ async def show_svg():
 
     svg_str = str(svg)
 
+    svg_str = svg_str.replace(
+        'style="position: absolute; left: 0px; top: 0px; direction: ltr; stroke: rgb(0, 0, 0); stroke-width: 0; fill: rgb(0, 0, 0);"',
+        'style="position: relative; direction: ltr; stroke: rgb(0, 0, 0); stroke-width: 0; fill: rgb(0, 0, 0);"'
+    )
+
     now = datetime.now(
         timezone(timedelta(hours=5))
     ).strftime("%H:%M / %Y-%m-%d")
