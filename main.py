@@ -59,6 +59,9 @@ def show_svg():
 
         items = panel.find_elements(By.CSS_SELECTOR, "li")
 
+        if len(items) < 32:
+            raise Exception("Not enough class items found")
+
         # Select item
         items[31].click()
 
