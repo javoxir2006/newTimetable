@@ -44,11 +44,11 @@ async def show_svg():
 
         items = await page.query_selector_all(".dropDownPanel li")
 
-        if len(items) < 24:
+        if len(items) < 32:
             raise Exception("Not enough classes found")
 
         # Click your class
-        await items[23].click()
+        await items[31].click()
 
         # Let SVG render
         await page.wait_for_timeout(5000)
@@ -81,42 +81,41 @@ async def show_svg():
     html_out = f"""
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Timetable</title>
+  <head>
+    <meta charset="utf-8">
+    <title>Timetable</title>
+    <style>
+      body{{
+          margin: 0;
+          padding: 0;
+          width: 100vw;
+          box-sizing: border-box;
+      }}
 
-<style>
-body {{
-  margin: 0;
-  font-family: Arial;
-}}
+      .svg-container {{
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          gap: 8px;
+          width: 100%;
+          height: 100vh;
+        }}
 
-.svg-container {{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}}
+        .last-updated {{
+            text-align: center;
+            color: #666;
+            margin-top: 10px;
+            font-size: 20px;
+        }}
+    </style>
+  </head>
 
-.last-updated {{
-  color: #666;
-  font-size: 20px;
-}}
-</style>
-</head>
-
-<body>
-
-<div class="svg-container">
-
-{svg_str}
-
-<div class="last-updated">
-Last updated: {now}
-</div>
-
-</div>
-
-</body>
+  <body>
+    <div class="svg-container">
+      { svg_str }
+<div class="last-updated">Last updated: {datetime.now(timezone(timedelta(hours=5))).strftime("%H:%M / %Y-%m-%d")}</div>
+    </div>
+  </body>
 </html>
 """
 
